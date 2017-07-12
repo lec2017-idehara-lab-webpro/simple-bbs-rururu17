@@ -24,7 +24,7 @@ http://localhost/simple-bbs-ユーザ名/
 ```sample.php``` で実行されている SQL：
 
 ```
-select mid, body, messages.uid as uid, coalesce(avg(eval),0) as av, count(*) from evals
+select mid, body, messages.uid as uid, coalesce(avg(eval),0) as av, count(*) as count from evals
   right join messages using(mid)
   left join users on messages.uid=users.uid
   group by mid
@@ -33,7 +33,7 @@ select mid, body, messages.uid as uid, coalesce(avg(eval),0) as av, count(*) fro
 
 - ```coalesce``` は、値がない（NULL）のときに別の値を使う関数
 - ```right join``` は、左側に値がなくてもよい。```left join``` は、右側に値がなくてもよい。```inner join``` は、両側に値がなければならない。今回、evals に値がなくても、messages からデータを引っ張ってきたいので、```right join``` が適切
-- avg, sum, count などの集計関数は、```group by``` 節を伴って、グループごとの集計値を計算する。 
+- avg, sum, count などの集計関数は、```group by``` 節を伴って、グループごとの集計値を計算する。
 
 ## データベース構造を変更したい人に
 
