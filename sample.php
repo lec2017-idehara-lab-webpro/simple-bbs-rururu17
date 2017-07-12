@@ -19,7 +19,7 @@
 
 <?php
   include_once('database.php');
-  $query = "select mid, body, messages.uid as uid, coalesce(avg(eval),0) as av, count(*) from evals ";
+  $query = "select mid, body, messages.uid as uid, coalesce(avg(eval),0) as av, count(*) as count, name from evals ";
   // ここが left join だとどうなるでしょう？
   $query = $query . "right join messages using(mid) ";
   $query = $query . "left join users on messages.uid=users.uid ";
