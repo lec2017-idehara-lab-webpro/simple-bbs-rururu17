@@ -16,11 +16,12 @@ http://localhost/simple-bbs-ユーザ名/
 - 出力を表形式にする（HTML）
 - あちこちのページを、もうすこしマシなデザインにする（HTML/CSS)
 - 評価の数字に制限を加える（いまは「一万点」でも「マイナス１００点」でも入れられます） (PHP)
+- 自分の書き込みは評価させない (PHP)
 
 
 余裕がある人は、```sample.php``` を参照して、書き込みの評価を ```index.php``` に入れ込む・評価の低い書き込みは表示しないなど、独自の機能を入れてみなさい。
 
-```sample.php``` で実行される SQL：
+```sample.php``` で実行されている SQL：
 
 ```
 select mid, body, messages.uid as uid, coalesce(avg(eval),0) as av, count(*) from evals
@@ -29,6 +30,10 @@ select mid, body, messages.uid as uid, coalesce(avg(eval),0) as av, count(*) fro
   group by mid
   order by mid asc
 ```
+
+- ```coalesce``` は、値がない（NULL）のときに別の値を使う関数
+- ```right join``` は、左側に値がなくてもよい。```left join``` は、右側に値がなくてもよい。```inner join``` は、両側に値がなければならない。今回、evals に値がなくても、messages からデータを引っ張ってきたいので、```right join``` が適切
+- avg, sum, count などの集計関数は、```group by``` 節を伴って、グループごとの集計値を計算する。 
 
 ## データベース構造を変更したい人に
 
