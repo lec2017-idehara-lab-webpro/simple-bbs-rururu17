@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+﻿<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -24,7 +24,7 @@
   if( $resnr > 0 )
     print( $resnr . " への返信です。<hr />");
   else
-    print( "新規書き込み" );
+    print( "<h1>新規書き込み</h1>" );
 
   // 本当は、ログインしていないと書けない
 
@@ -33,9 +33,9 @@
 
 print "
  <form action='postres.php' method='post'>
-   <input type='text' name='mes'>
+   <input type='text' name='mes' size=100>
    <input type='hidden' name='resnr' value='$resnr'>
-   <input type='submit'>
+   <input type='submit' value='送信'>
  </form>
  ";
 ?>

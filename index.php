@@ -36,6 +36,7 @@
 
     print ("<br />");
   }
+  print("</table>");
   $result->close();
  ?>
 
